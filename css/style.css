@@ -33,3 +33,9 @@
     width: 100%;
     background-color: cadetblue;
 }
+
+.thumbs img{
+    height: 100%;
+    width: calc(100% / 5);
+    object-fit: cover;
+}
