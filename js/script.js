@@ -66,9 +66,9 @@ function init(){
 
     // ciclo l'array di immagini e stampo in pagina e immagini
 
-    images.forEach(image => {
+    images.forEach((image, index) => {
         containerImages.innerHTML += getTemplateImage(image);
-        containerThumb.innerHTML += getTemplateThumb(image);
+        containerThumb.innerHTML += getTemplateThumb(image, index);
     });
     activateImage();
     console.log('init');
@@ -97,11 +97,11 @@ function deactivateImage(){
     document.getElementsByClassName('my-thumbnail')[counterImages].classList.remove('active');
 }
 
-function getTemplateImage(image){
+function getTemplateImage(image, index){
     const {immagine, paese, commento} = image;
 
     return `
-    <div class="my-carousel-item" >
+    <div class="my-carousel-item"  >
         <img class="img-fluid" src="${immagine}" alt="${paese}picture">
         <div class="item-description px-3">
             <h2>${paese}</h2>
@@ -111,14 +111,21 @@ function getTemplateImage(image){
     `
 }
 
-function getTemplateThumb(image){
+function getTemplateThumb(image, index){
     const {immagine, paese} = image;
 
     return `
-    <div class="my-thumbnail ">
+    <div class="my-thumbnail" onclick="hendleThumb(${index})">
         <img class="img-fluid" src="${immagine}" alt="Thumbnail of ${paese} picture">
     </div>
     `
+}
+
+function hendleThumb(index){
+    deactivateImage();
+    counterImages= index;
+    activateImage();
+
 }
 
 
