@@ -76,15 +76,19 @@ function init(){
 
 function handleNextPrev(){
     deactivateImage();
-    if(this.isNext){
+    nextPrev(this.isNext);
+    activateImage();
+
+}
+
+function nextPrev(isNext){
+    if(isNext){
         counterImages++;
         if(counterImages === images.length) counterImages = 0;
     }else{
         counterImages--;
         if(counterImages < 0) counterImages = images.length -1;
     }
-    activateImage();
-
 }
 
 function activateImage(){
@@ -128,4 +132,10 @@ function hendleThumb(index){
 
 }
 
+setInterval(()=>{
 
+    deactivateImage();
+    nextPrev(true);
+    activateImage();
+
+},2000)
