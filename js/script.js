@@ -45,8 +45,13 @@ const images = [
 
 const containerImages = document.querySelector('.my-carousel-images');
 const containerThumb = document.querySelector('.my-thumbnails .inner');
+const containerSlider = document.querySelector('.my-carousel-container')
 const nextBtn = document.querySelector('.my-next-hook');
 const prevBtn = document.querySelector('.my-prev-hook');
+
+let counterImages = 0;
+
+let isOverSlider = false;
 
 nextBtn.isNext = true;
 prevBtn.isNext = false;
@@ -54,7 +59,15 @@ prevBtn.isNext = false;
 nextBtn.addEventListener('click', handleNextPrev);
 prevBtn.addEventListener('click', handleNextPrev);
 
-let counterImages = 0;
+containerSlider.addEventListener('mouseenter', () =>{
+    isOverSlider = true;
+});
+
+containerSlider.addEventListener('mouseleave', () =>{
+    isOverSlider = false;
+})
+
+
 
 init();
 
@@ -134,8 +147,11 @@ function hendleThumb(index){
 
 setInterval(()=>{
 
-    deactivateImage();
-    nextPrev(true);
-    activateImage();
+    if(!isOverSlider){
+        deactivateImage();
+        nextPrev(true);
+        activateImage();
+    }
+    
 
 },2000)
